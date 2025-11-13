@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: DevEvent API
+
+  datasource:
+    url: jdbc:h2:file:./data/dev;AUTO_SERVER=TRUE;
+    driver-class-name: org.h2.Driver
+    username: admin
+    password: admin
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
