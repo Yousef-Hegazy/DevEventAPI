@@ -21,11 +21,6 @@ data class EventDto(
     val overview: String,
 
     @field:NotBlank(message = "Image URL is required")
-    @field:Pattern(
-        regexp = "^(https?://|//).*\\.(jpg|jpeg|png|gif|webp|svg)$",
-        message = "Please provide a valid image URL",
-        flags = [Pattern.Flag.CASE_INSENSITIVE]
-    )
     val image: String,
 
     @field:NotBlank(message = "Venue is required")

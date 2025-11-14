@@ -3,31 +3,70 @@ package com.example.DevEvent.mappers
 import com.example.DevEvent.domain.entities.Event
 import com.example.DevEvent.dtos.CreateEventRequest
 import com.example.DevEvent.dtos.EventDto
-import org.mapstruct.Mapper
-import org.mapstruct.Mapping
-import org.mapstruct.MappingConstants
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
-interface EventMapper {
+// Extension function: Entity to DTO
+fun Event.toDto(): EventDto = EventDto(
+    id = id,
+    title = title,
+    description = description,
+    overview = overview,
+    image = image,
+    venue = venue,
+    location = location,
+    date = date,
+    time = time,
+    mode = mode,
+    audience = audience,
+    agenda = agenda,
+    organizer = organizer,
+    tags = tags,
+    slug = slug,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)
 
-    // Entity to DTO
-    fun toDto(event: Event): EventDto
+// Extension function: DTO to Entity
+fun EventDto.toEntity(): Event = Event(
+    id = id,
+    title = title,
+    description = description,
+    overview = overview,
+    image = image,
+    venue = venue,
+    location = location,
+    date = date,
+    time = time,
+    mode = mode,
+    audience = audience,
+    agenda = agenda,
+    organizer = organizer,
+    tags = tags,
+    slug = slug,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)
 
-    // DTO to Entity
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "slug", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    fun toEntity(dto: EventDto): Event
+// Extension function: CreateEventRequest to Entity
+fun CreateEventRequest.toEntity(): Event = Event(
+    id = null,
+    title = title,
+    description = description,
+    overview = overview,
+    image = image,
+    venue = venue,
+    location = location,
+    date = date,
+    time = time,
+    mode = mode,
+    audience = audience,
+    agenda = agenda,
+    organizer = organizer,
+    tags = tags,
+    slug = null,
+    createdAt = null,
+    updatedAt = null
+)
 
-    // CreateEventRequest to Entity
-    @Mapping(target = "id", ignore = true)
-    @Mapping(target = "slug", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
-    fun toEntity(request: CreateEventRequest): Event
-
-    // List mappings
-    fun toDtoList(events: List<Event>): List<EventDto>
-}
+// Extension function: List<Event> to List<EventDto>
+fun List<Event>.toDtoList(): List<EventDto> = map { it.toDto() }
 

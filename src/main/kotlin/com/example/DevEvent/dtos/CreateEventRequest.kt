@@ -16,13 +16,7 @@ data class CreateEventRequest(
     @field:Size(max = 500, message = "Overview cannot exceed 500 characters")
     val overview: String,
 
-    @field:NotBlank(message = "Image URL is required")
-    @field:Pattern(
-        regexp = "^(https?://|//).*\\.(jpg|jpeg|png|gif|webp|svg)$",
-        message = "Please provide a valid image URL",
-        flags = [Pattern.Flag.CASE_INSENSITIVE]
-    )
-    val image: String,
+    val image: String = "",
 
     @field:NotBlank(message = "Venue is required")
     val venue: String,
@@ -46,7 +40,7 @@ data class CreateEventRequest(
     val time: String,
 
     @field:NotNull(message = "Mode is required")
-    val mode: EventMode,
+    var mode: EventMode,
 
     @field:NotBlank(message = "Audience is required")
     val audience: String,
